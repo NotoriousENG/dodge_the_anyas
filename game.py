@@ -41,11 +41,14 @@ class Game:
         SceneManager.current_scene.Update(deltaTime)
 
     def Draw(self):
-        # draw the white background onto the surface
-        self.windowSurface.fill((255, 255, 255))
-
         # draw the background (stretch to fit)
         self.windowSurface.blit(Resources.bg, (0, 0, 800, 600))
+
+        # draw a transparent black overlay
+        overlay = pygame.Surface((800, 600))
+        overlay.set_alpha(128)
+        overlay.fill((0, 0, 0))
+        self.windowSurface.blit(overlay, (0, 0))
 
         # draw the scene
         SceneManager.current_scene.Draw(self.windowSurface)

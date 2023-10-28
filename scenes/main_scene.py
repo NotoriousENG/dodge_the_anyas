@@ -53,7 +53,7 @@ class MainScene(Scene):
 
         # draw score in the top left
         font = pygame.font.SysFont('Arial', 30)
-        text = font.render('Score: ' + str(self.score), True, (0, 0, 0))
+        text = font.render('Score: ' + str(self.score), True, (255, 255, 255))
         textRect = text.get_rect()
         textRect.topleft = (0, 0)
         windowSurface.blit(text, textRect)

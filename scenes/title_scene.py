@@ -30,7 +30,7 @@ class TitleScene(Scene):
     def Draw(self, windowSurface: pygame.Surface):
         # draw the title
         font = pygame.font.SysFont('Arial', 60)
-        text = font.render('Dodge the Anyas!', True, (0, 0, 0))
+        text = font.render('Dodge the Anyas!', True, (255, 255, 255))
         textRect = text.get_rect()
         textRect.center = (400, 300)
         windowSurface.blit(text, textRect)
@@ -38,7 +38,7 @@ class TitleScene(Scene):
         if self.draw_start:
             # draw press space to start
             font = pygame.font.SysFont('Arial', 30)
-            text = font.render('Press Space to Start', True, (0, 0, 0))
+            text = font.render('Press Space to Start', True, (255, 255, 255))
             textRect = text.get_rect()
             textRect.center = (400, 500)
             windowSurface.blit(text, textRect)
