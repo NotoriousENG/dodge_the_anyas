@@ -1,6 +1,7 @@
 #include "game_scene.h"
 #include "entity.h"
 #include "resources.h"
+#include <sinput.h>
 
 GameScene *game_new(Resources *resources) {
   GameScene *scene = (GameScene *)malloc(sizeof(GameScene));
@@ -62,6 +63,9 @@ void game_logic(GameScene *scene, float delta) {
 }
 
 void player_logic(GameScene *scene, float delta) {
+
+  float x = 0;
+
   // player movement on xy, clamp to screen (A, Left Arrow, D, Right Arrow)
   if (scene->resources->keyboard[SDL_SCANCODE_A] == PRESSED ||
       scene->resources->keyboard[SDL_SCANCODE_LEFT] == PRESSED) {
@@ -125,7 +129,14 @@ void game_over(GameScene *scene) {
   int final_score = (int)floor(scene->score);
   scene->resources->last_score = final_score;
   game_begin(scene);
-  load_scene_by_name(scene->resources, TITLE_SCENE);
+  if (final_score >=
+      scene->resources->leaderboard_scene->records[NUM_HIGHSCORES - 1].score) {
+    scene->resources->leaderboard_scene->added = 0;
+  } else {
+    scene->resources->leaderboard_scene->added = 1;
+  }
+  scene->resources->leaderboard_scene->added_index = -1;
+  load_scene_by_name(scene->resources, LEADERBOARD_SCENE);
 }
 
 void game_begin(GameScene *scene) {

@@ -50,6 +50,19 @@ void main_loop() {
 
   SDL_RenderClear(renderer);
 
+  SDL_Event event;
+
+  while (SDL_PollEvent(&event)) {
+    switch (event.type) {
+    case SDL_QUIT:
+      exit(0);
+      break;
+    case SDL_TEXTINPUT:
+      STRNCPY(resources.input_text, event.text.text, HS_NAME_LENGTH + 1);
+      break;
+    }
+  }
+
   doInput(resources.keyboard);
 
   resources.scene_logic(resources.scene, delta);
@@ -124,7 +137,7 @@ int main(int argc, char *argv[]) {
   resources.title_scene = title_new(&resources);
   resources.game_scene = game_new(&resources);
   resources.leaderboard_scene = leaderboard_new(&resources);
-  load_scene_by_name(&resources, LEADERBOARD_SCENE);
+  load_scene_by_name(&resources, TITLE_SCENE);
 
   play_music_on_loop(resources.music);
 

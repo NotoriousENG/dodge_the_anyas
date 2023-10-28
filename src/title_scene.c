@@ -31,6 +31,14 @@ void title_logic(TitleScene *scene, float delta) {
     scene->current_time = 0;
   }
 
+  scene->toggle_timer += delta;
+  if (scene->toggle_timer > SCENE_TOGGLE_TIME) {
+    scene->toggle_timer = 0.0f;
+    scene->resources->leaderboard_scene->toggle_timer = 0.0f;
+    scene->resources->leaderboard_scene->added = 1;
+    return load_scene_by_name(scene->resources, LEADERBOARD_SCENE);
+  }
+
   if (scene->resources->keyboard[SDL_SCANCODE_SPACE] == JUST_PRESSED) {
     load_scene_by_name(scene->resources, GAME_SCENE);
   }

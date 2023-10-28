@@ -29,7 +29,7 @@ typedef struct Resources {
   TitleScene *title_scene;
   GameScene *game_scene;
   LeaderboardScene *leaderboard_scene;
-
+  char input_text[HS_NAME_LENGTH + 1];
   // Current Scene
   void *scene;
   void (*scene_draw)(void *scene, SDL_Renderer *renderer);

@@ -9,6 +9,7 @@ typedef struct TitleScene {
   Resources *resources;
   float current_time;
   int draw_start;
+  float toggle_timer;
 } TitleScene;
 
 TitleScene *title_new(Resources *resources);

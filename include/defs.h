@@ -1,4 +1,9 @@
 #pragma once
+
+#define STRNCPY(dest, src, n)                                                  \
+  strncpy(dest, src, n);                                                       \
+  dest[n - 1] = '\0'
+
 #define MAX_LINE_LENGTH 1024
 
 #define MAX_SOUND_CHANNELS 8
