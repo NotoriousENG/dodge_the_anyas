@@ -4,13 +4,12 @@
 Resources load_resources(SDL_Renderer *renderer) {
   Resources resources;
   memset(&resources, 0, sizeof(Resources));
-  resources.music = load_music("assets/music/happy.mp3");
   resources.font_small = loadFont("assets/fonts/cat_paw.ttf", FONT_SIZE_SMALL);
   resources.font_large = loadFont("assets/fonts/cat_paw.ttf", FONT_SIZE_LARGE);
   resources.player_texture = loadTexture(renderer, "assets/sprites/tink.png");
   resources.enemy_texture = loadTexture(renderer, "assets/sprites/anya.png");
   resources.bg_texture = loadTexture(renderer, "assets/sprites/bg.png");
-  resources.joystick = SDL_JoystickOpen(0);
+  resources.music = load_music("assets/music/happy.ogg");
   return resources;
 }
 
@@ -51,10 +50,6 @@ void free_resources(Resources resources) {
   SDL_DestroyTexture(resources.player_texture);
   SDL_DestroyTexture(resources.enemy_texture);
   SDL_DestroyTexture(resources.bg_texture);
-
-  if (resources.joystick != NULL) {
-    SDL_JoystickClose(resources.joystick);
-  }
 }
 
 Mix_Music *load_music(char *filename) {

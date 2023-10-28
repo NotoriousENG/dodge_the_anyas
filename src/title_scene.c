@@ -5,6 +5,7 @@
 
 TitleScene *title_new(Resources *resources) {
   TitleScene *scene = (TitleScene *)malloc(sizeof(TitleScene));
+  memset(scene, 0, sizeof(TitleScene));
   scene->resources = resources;
   scene->current_time = 0;
   scene->draw_start = 0;

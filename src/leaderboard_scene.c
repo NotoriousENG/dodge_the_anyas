@@ -5,6 +5,7 @@
 LeaderboardScene *leaderboard_new(Resources *resources) {
   LeaderboardScene *scene =
       (LeaderboardScene *)malloc(sizeof(LeaderboardScene));
+  memset(scene, 0, sizeof(LeaderboardScene));
   scene->resources = resources;
 
   if (!read_highscores(scene->records, NUM_HIGHSCORES)) {

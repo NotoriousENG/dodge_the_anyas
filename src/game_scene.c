@@ -5,6 +5,7 @@
 
 GameScene *game_new(Resources *resources) {
   GameScene *scene = (GameScene *)malloc(sizeof(GameScene));
+  memset(scene, 0, sizeof(GameScene));
   scene->resources = resources;
   scene->draw_colliders = 0;
   game_begin(scene);

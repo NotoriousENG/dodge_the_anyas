@@ -22,7 +22,6 @@ typedef struct Resources {
   SDL_Texture *enemy_texture;
   SDL_Texture *bg_texture;
   KeyState keyboard[MAX_KEYBOARD_KEYS];
-  SDL_Joystick *joystick;
   int running;
   int last_score;
   // Loaded Scenes
