@@ -1,3 +1,4 @@
+#!/usr/bin/env pypy
 import pygame
 from records import Records
 from resources import Resources
@@ -5,7 +6,7 @@ from scenes import SceneManager, TitleScene, HighScoreScene
 
 
 class Game:
-    def __init__(self) -> None:
+    def __init__(self):
         pygame.init()
         self.windowSurface = pygame.display.set_mode((800, 600))
         pygame.display.set_caption('Dodge the Anyas!')

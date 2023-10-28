@@ -20,23 +20,37 @@ class MainScene(Scene):
         self.gameObjects.append(Player(pygame.Vector2(
             400, 540), Resources.player_texture, self.common_collider))
 
-        self.add_enemies()
+        self.init_enemies()
+
+        self.enabled_count = 11
 
         self.spawn_timer = 10.0
 
-    def add_enemies(self):
-        for i in range(0, 10):
+    def init_enemies(self):
+        for i in range(0, 1000):
+            enabled = True
+            if i > 10:
+                enabled = False
             # ensure no overlaps
             position = pygame.Vector2(randint(0, 800), randint(-600, 0))
             self.gameObjects.append(
-                Enemy(position, Resources.enemy_texture, self.common_collider))
+                Enemy(position, Resources.enemy_texture, self.common_collider, enabled))
+
+    def add_enemies(self):
+        to_enable = self.enabled_count + 10
+        self.enabled_count += 1
+        while self.enabled_count < len(self.gameObjects) and self.enabled_count < to_enable:
+            self.gameObjects[self.enabled_count].enabled = True
+            self.enabled_count += 1
 
     def Update(self, deltaTime: float):
-        for go in self.gameObjects:
+        for i in range(self.enabled_count):
+            go = self.gameObjects[i]
             go.Update(deltaTime)
             if isinstance(go, Player):
-                for other in self.gameObjects:
-                    if go != other and go.Overlaps(other):
+                for j in range(self.enabled_count):
+                    other = self.gameObjects[j]
+                    if i != j and go.Overlaps(other):
                         Records.SetCurrentScore(self.score)
                         SceneManager.LoadScene((HighScoreScene()))
         t = pygame.time.get_ticks() // 1000
